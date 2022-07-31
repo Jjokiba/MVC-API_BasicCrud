@@ -1,0 +1,172 @@
+﻿@model WebMVC.Models.Cliente
+
+@{
+    ViewBag.Title = "CreateUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> listaGenero = new List<string> { "Masculino", "Feminino", "Não Informar" };
+    List<string> listaGeneroID = new List<string> { "Masculino", "Feminino", "Não Informar" };
+    ViewBag.Genero = new SelectList(listaGenero, listaGeneroID);
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+@*@if (HttpContext.Current.Request["t"] != null)
+    {
+        <h2>Editar cliente</h2>
+    }
+    else
+    {
+        <h2>Criar cliente</h2>
+    }*@
+
+@using (Html.BeginForm())
+{
+    if (ViewData["Error"] != null)
+    {
+        <h3>Oops!</h3>
+        <p>
+            O sistema obteve um erro ao tentar salvar o dado!
+        </p>
+        <p>
+            @ViewData["Error"]
+        </p>
+    }
+    else if (ViewData["Success"] != null)
+    {
+        <h3>Sucesso!</h3>
+        <p>
+            O sistema salvou o dado com sucesso!
+        </p>
+    }
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { placeholder = "555.555.555-55", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group rg">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.RG, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.RG, new { htmlAttributes = new { placeholder = "55.555.555-5", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RG, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Data_Expedicao, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Data_Expedicao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Data_Expedicao, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Orgao_Expedicao, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Orgao_Expedicao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Orgao_Expedicao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Data_Nasc, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Data_Nasc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Data_Nasc, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label " })*
+                @Html.DropDownListFor(model => model.Genero, (SelectList)ViewBag.Genero, "Selecione um item", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Estado_Civil, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Estado_Civil, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Estado_Civil, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <h3>Endereço</h3>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { placeholder = "55555-555", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Logadouro, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Logadouro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Logadouro, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label " })
+                @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.UF, htmlAttributes: new { @class = "control-label " })*
+                @Html.EditorFor(model => model.UF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UF, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Confirmar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section scripts {
+    <script>
+
+        $(function () {
+            $("#CPF").inputmask('999.999.999-99');
+            $("#Data_Nasc").inputmask("datetime", {
+                inputFormat: 'dd/mm/yyyy'
+            });
+            $("Data_Expedicao").inputmask("datetime", {
+                inputFormat: 'dd/mm/yyyy'
+            });
+            $("#RG").inputmask('99.999.999-9');
+            $("#CEP").inputmask('99999-999');
+
+        })
+    </script>
+}

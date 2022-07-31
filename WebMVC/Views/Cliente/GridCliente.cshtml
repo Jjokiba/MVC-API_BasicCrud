@@ -1,0 +1,126 @@
+﻿@model IEnumerable<WebMVC.Models.Cliente>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("CreateUpdate", "Cliente")'">
+    Criar novo Cliente
+</button>
+<p>
+    
+</p>
+<table class="table table-hover">
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.RG)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Data_Expedicao)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Orgao_Expedicao)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Data_Nasc)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Genero)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Estado_Civil)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.CEP)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Logadouro)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Numero)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Complemento)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Bairro)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Cidade)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.UF)
+        </th>
+        <th scope="col">
+            Ações
+        </th>
+    </tr>
+    <tbody>
+        @if (Model != null)
+         {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CPF)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RG)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_Expedicao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Orgao_Expedicao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_Nasc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado_Civil)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CEP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Logadouro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Complemento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bairro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UF)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "CreateUpdate", new { id = item.Id }) |
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+             }
+         }
+        else
+        {
+            <tr><td colspan="15">Nenhum dado encontrado.<td></tr>
+        }
+    </tbody>
+</table>
